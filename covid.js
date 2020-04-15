@@ -7,34 +7,34 @@ $(document).ready(function () {
         data = ''
         for (var i in _India) {
             // console.log('hi');
-            if (_India[i]["state"] != "Total") {
-                if (_India[i]["deltaconfirmed"] > 0) {
-                    data += ' <tr class="bg-danger">' +
-                        '<td>' + _India[i]["state"] + '</td>' +
-                        '<td>' + _India[i]["active"] + '</td>' +
-                        '<td>' + _India[i]["confirmed"] + '</td>' +
-                        '<td>' + _India[i]["deaths"] + '</td>' +
-                        '<td>' + _India[i]["deltaconfirmed"] + '</td>' +
-                        '<td>' + _India[i]["deltadeaths"] + '</td>' +
-                        '<td>' + _India[i]["deltarecovered"] + '</td>' +
-                        '<td>' + _India[i]["lastupdatedtime"] + '</td>' +
-                        '<td>' + _India[i]["recovered"] + '</td>' +
-                        '</tr>';
-                } else {
-                    data += ' <tr class="bg-success">' +
-                        '<td>' + _India[i]["state"] + '</td>' +
-                        '<td>' + _India[i]["active"] + '</td>' +
-                        '<td>' + _India[i]["confirmed"] + '</td>' +
-                        '<td>' + _India[i]["deaths"] + '</td>' +
-                        '<td>' + _India[i]["deltaconfirmed"] + '</td>' +
-                        '<td>' + _India[i]["deltadeaths"] + '</td>' +
-                        '<td>' + _India[i]["deltarecovered"] + '</td>' +
-                        '<td>' + _India[i]["lastupdatedtime"] + '</td>' +
-                        '<td>' + _India[i]["recovered"] + '</td>' +
-                        '</tr>';
-                }
 
+            if (_India[i]["deltaconfirmed"] > 0) {
+                data += ' <tr class="bg-danger">' +
+                    '<td>' + _India[i]["state"] + '</td>' +
+                    '<td>' + _India[i]["active"] + '</td>' +
+                    '<td>' + _India[i]["confirmed"] + '</td>' +
+                    '<td>' + _India[i]["deaths"] + '</td>' +
+                    '<td>' + _India[i]["deltaconfirmed"] + '</td>' +
+                    '<td>' + _India[i]["deltadeaths"] + '</td>' +
+                    '<td>' + _India[i]["deltarecovered"] + '</td>' +
+                    '<td>' + _India[i]["lastupdatedtime"] + '</td>' +
+                    '<td>' + _India[i]["recovered"] + '</td>' +
+                    '</tr>';
+            } else {
+                data += ' <tr class="bg-success">' +
+                    '<td>' + _India[i]["state"] + '</td>' +
+                    '<td>' + _India[i]["active"] + '</td>' +
+                    '<td>' + _India[i]["confirmed"] + '</td>' +
+                    '<td>' + _India[i]["deaths"] + '</td>' +
+                    '<td>' + _India[i]["deltaconfirmed"] + '</td>' +
+                    '<td>' + _India[i]["deltadeaths"] + '</td>' +
+                    '<td>' + _India[i]["deltarecovered"] + '</td>' +
+                    '<td>' + _India[i]["lastupdatedtime"] + '</td>' +
+                    '<td>' + _India[i]["recovered"] + '</td>' +
+                    '</tr>';
             }
+
+
         }
         $("#covid").append(data);
         data = ''

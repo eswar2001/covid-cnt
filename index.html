@@ -2,105 +2,115 @@
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Know The Count</title>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+	<title>Know The Count</title>
 </head>
 <style>
-    body {
-        height: 100%;
-    }
-
-    .card {
-        padding: 2vh;
-    }
+	body {
+	        height: 100%;
+	    }
+	
+	    .card {
+	        padding: 2vh;
+	    }
+	
+	    section {
+	        padding: 2%;
+	    }
+	
+	    nav {
+	        width: 100%;
+	    }
 </style>
 
-<body>
-    <div class="container text-capitalize align-content-center">
-        <h1 style="padding: 5%;">State wide</h1>
-        <div class="table-responsive table-responsive-xl table-responsive-md table-responsive-sm table-responsive-lg">
-            <table class="table table-hover table-bordered">
-                <thead>
-                    <tr style="color:white;background-color: black;">
-                        <th scope="col">State</th>
-                        <th scope="col">Active</th>
-                        <th scope="col">Confirmed</th>
-                        <th scope="col">Deaths</th>
-                        <th scope="col">Deltaconfirmed</th>
-                        <th scope="col">Deltadeaths</th>
-                        <th scope="col">Deltarecovered</th>
-                        <th scope="col">Lastupdatedtime</th>
-                        <th scope="col">Recovered</th>
-                    </tr>
-                </thead>
-                <tbody id="covid" style="color: azure;">
-
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="container-fluid text-capitalize align-content-center" style="width: fit-content;">
-        <h1 style="padding: 5%;">Day wise</h1>
-        <div id="covid-daily">
-        </div>
-    </div>
-    <div class="container">
-        <div class="card">
-            <div class="card-header">
-                Refrences
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">HELPLINE NUMBERS [by State]<a
-                        href="https://www.mohfw.gov.in/pdf/coronvavirushelplinenumber.pdf" target="_blank"
-                        rel="noopener noreferrer">https://www.mohfw.gov.in/pdf/coronvavirushelplinenumber.pdf</a></li>
-
-
-                <li class="list-group-item">Ministry of Health and Family Welfare, Gov. of
-                    India<a href="https://www.mohfw.gov.in/" target="_blank"
-                        rel="noopener noreferrer">https://www.mohfw.gov.in/</a></li>
-
-
-                <li class="list-group-item">WHO : COVID-19 Home Page<a
-                        href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019" target="_blank"
-                        rel="noopener noreferrer">https://www.who.int/emergencies/diseases/novel-coronavirus-2019</a>
-                </li>
-
-
-                <li class="list-group-item">CDC<a href="https://www.cdc.gov/coronavirus/2019-ncov/faq.html"
-                        target="_blank" rel="noopener noreferrer">https://www.cdc.gov/coronavirus/2019-ncov/faq.html</a>
-                </li>
-
-
-                <li class="list-group-item">Crowdsourced list of Resources &amp; Essentials
-                    from across India<a href="https://bit.ly/covid19resourcelist" target="_blank"
-                        rel="noopener noreferrer">https://bit.ly/covid19resourcelist</a></li>
-
-
-                <li class="list-group-item">COVID-19 Global Tracker<a href="https://coronavirus.thebaselab.com/"
-                        target="_blank" rel="noopener noreferrer">https://coronavirus.thebaselab.com/</a></li>
-            </ul>
-        </div>
-
-    </div>
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
-        integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="./covid.js">
-        alert("This alert box was called with the onload event");
-    </script>
-
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+	<nav class="navbar bg-primary navbar-expand-sm  navbar-dark fixed-top">
+		<h2>Know The Count</h2>
+		<ul class="navbar-nav">
+			<li class="nav-item"> <a class="nav-link" href="#cnt">State wise count</a>
+			</li>
+			<li class="nav-item"> <a class="nav-link" href="#covid-daily">Day wise count</a>
+			</li>
+			<li class="nav-item"> <a class="nav-link" href="#ViostreamIframe">Coverage Map</a>
+			</li>
+			<li class="nav-item"> <a class="nav-link" href="#ref">Refrences</a>
+			</li>
+		</ul>
+	</nav>
+	<section id="cnt">
+		<div class="container text-capitalize align-content-center">
+			<h1 style="padding: 5%;">State Wide
+                <hr>
+            </h1>
+			<div class="table-responsive table-responsive-xl table-responsive-md table-responsive-sm table-responsive-lg">
+				<table class="table table-hover table-bordered">
+					<thead>
+						<tr style="color:white;background-color: black;">
+							<th scope="col">State</th>
+							<th scope="col">Active</th>
+							<th scope="col">Confirmed</th>
+							<th scope="col">Deaths</th>
+							<th scope="col">Deltaconfirmed</th>
+							<th scope="col">Deltadeaths</th>
+							<th scope="col">Deltarecovered</th>
+							<th scope="col">Lastupdatedtime</th>
+							<th scope="col">Recovered</th>
+						</tr>
+					</thead>
+					<tbody id="covid" style="color: azure;"></tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+	<section>
+		<div class="container-fluid mt-3 text-capitalize align-content-center" style="width: fit-content;">
+			<h3 style="padding: 5%;">Day wise
+                <hr>
+            </h3>
+			<div id="covid-daily"></div>
+		</div>
+	</section>
+	<section>
+		<div id="Container" style="padding-bottom:56.25%; position:relative; display:block; width: 100%">
+			<iframe id="ViostreamIframe" width="100%" height="100%" src="https://app.developer.here.com/coronavirus/" frameborder="0" allowfullscreen="" style="position:absolute; top:0; left: 0"></iframe>
+		</div>
+	</section>
+	<section id="ref">
+		<div class="container">
+			<div class="card">
+				<div class="card-header">Refrences</div>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item">HELPLINE NUMBERS [by State]<a href="https://www.mohfw.gov.in/pdf/coronvavirushelplinenumber.pdf" target="_blank" rel="noopener noreferrer">https://www.mohfw.gov.in/pdf/coronvavirushelplinenumber.pdf</a>
+					</li>
+					<li class="list-group-item">Ministry of Health and Family Welfare, Gov. of India<a href="https://www.mohfw.gov.in/" target="_blank" rel="noopener noreferrer">https://www.mohfw.gov.in/</a>
+					</li>
+					<li class="list-group-item">WHO : COVID-19 Home Page<a href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019" target="_blank" rel="noopener noreferrer">https://www.who.int/emergencies/diseases/novel-coronavirus-2019</a>
+					</li>
+					<li class="list-group-item">CDC<a href="https://www.cdc.gov/coronavirus/2019-ncov/faq.html" target="_blank" rel="noopener noreferrer">https://www.cdc.gov/coronavirus/2019-ncov/faq.html</a>
+					</li>
+					<li class="list-group-item">Crowdsourced list of Resources &amp; Essentials from across India<a href="https://bit.ly/covid19resourcelist" target="_blank" rel="noopener noreferrer">https://bit.ly/covid19resourcelist</a>
+					</li>
+					<li class="list-group-item">COVID-19 Global Tracker<a href="https://coronavirus.thebaselab.com/" target="_blank" rel="noopener noreferrer">https://coronavirus.thebaselab.com/</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="./covid.js">
+		alert("This alert box was called with the onload event");
+	</script>
 </body>
 
 </html>
