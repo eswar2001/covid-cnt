@@ -30,7 +30,7 @@
 
     body {
         background-color: #121212;
-       font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         height: 100%;
         text-align: center;
         color: #bb86fb;
@@ -42,27 +42,33 @@
 
     nav {
         width: 100%;
+        background-color: rgb(65, 36, 112);
     }
 </style>
 
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
-    <nav class="navbar  navbar-expand-sm  navbar-dark" style="background-color: #121212; float: right;">
-        <h2>Know The Count</h2>
-        <ul class="navbar-nav ">
-            <li class="nav-item"> <a class="nav-link" href="#cnt">State wise count</a>
-            </li>
-            <li class="nav-item"> <a class="nav-link" href="#covid-daily">Day wise count</a>
-            </li>
-            <li class="nav-item"> <a class="nav-link" href="#ViostreamIframe">Coverage Map</a>
-            </li>
-            <li class="nav-item"> <a class="nav-link" href="#ref">Refrences</a>
-            </li>
-        </ul>
+    <nav class="navbar" style="align-content:space-around;">
+        <span class="nav-item dropdown">
+
+            <h2 class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">Know The Count</h2>
+
+            <div class="dropdown-menu">
+                <a class="nav-link" href="#cnt">State wise count</a>
+
+                <a class="nav-link" href="#covid-daily">Day wise count</a>
+
+                <a class="nav-link" href="#ViostreamIframe">Coverage Map</a>
+
+                <a class="nav-link" href="#ref">Refrences</a>
+            </div>
+        </span>
+
+
     </nav>
     <div class="backdrop">
         <section id="cnt">
             <div class="container text-capitalize align-content-center">
-                <h1 style="padding: 5%;">State Wide
+                <h1 style="padding: 5%;">State Wide Analysis
                     <hr>
                 </h1>
                 <div
@@ -135,6 +141,7 @@
             </div>
         </section>
     </div>
+
     <button class="mdc-fab app-fab--absolute" aria-label="Favorite">
         <a href="#cnt"> <span class="mdc-fab__icon material-icons">keyboard_arrow_up</span></a>
     </button>
