@@ -39,13 +39,13 @@ $(document).ready(function () {
         $("#covid").append(data);
         data = ''
         for (var i in _D) {
-            data += '<div class="card border-primary mb-3"><div class="card-header">' + _D[i]["date"] + '</div><div class="card-body text-primary">' +
-                '&nbsp;&nbsp;<span><strong>deceased on date: </strong></span>&nbsp;&nbsp;' + _D[i]["dailydeceased"] +
-                ',&nbsp;&nbsp;<span><strong>confirmed on date:</strong></span>&nbsp;&nbsp;' + _D[i]["dailyconfirmed"] +
-                ',&nbsp;&nbsp;<span><strong>recovered on date:</strong></span>&nbsp;&nbsp;' + _D[i]["dailyrecovered"] +
-                ',&nbsp;&nbsp;<span><strong>total confirmed:  </strong></span>&nbsp;&nbsp;' + _D[i]["totalconfirmed"] +
-                ',&nbsp;&nbsp;<span><strong>total deceased:   </strong></span>&nbsp;&nbsp;' + _D[i]["totaldeceased"] +
-                ',&nbsp;&nbsp;<span><strong>total recovered:  </strong></span>&nbsp;&nbsp;' + _D[i]["totalrecovered"] +
+            data += '<div style="background-color:#bb86fb;color:#121212;"; class="card border-primary mb-3"><div class="card-header">' + _D[i]["date"] + '</div><div class="card-body text-primary">' +
+                '&nbsp;&nbsp;<span  style="color:#121212;"><strong>deceased on date: </strong></span>&nbsp;&nbsp;' + _D[i]["dailydeceased"] +
+                ',&nbsp;&nbsp;<span  style="color:#121212;"><strong>confirmed on date:</strong></span>&nbsp;&nbsp;' + _D[i]["dailyconfirmed"] +
+                ',&nbsp;&nbsp;<span  style="color:#121212;"><strong>recovered on date:</strong></span>&nbsp;&nbsp;' + _D[i]["dailyrecovered"] +
+                ',&nbsp;&nbsp;<span  style="color:#121212;"><strong>total confirmed:  </strong></span>&nbsp;&nbsp;' + _D[i]["totalconfirmed"] +
+                ',&nbsp;&nbsp;<span  style="color:#121212;"><strong>total deceased:   </strong></span>&nbsp;&nbsp;' + _D[i]["totaldeceased"] +
+                ',&nbsp;&nbsp;<span  style="color:#121212;"><strong>total recovered:  </strong></span>&nbsp;&nbsp;' + _D[i]["totalrecovered"] +
                 '</div>' + '</div>  ';
         }
         $("#covid-daily").append(data);

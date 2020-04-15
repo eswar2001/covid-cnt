@@ -29,8 +29,11 @@
     }
 
     body {
+        background-color: #121212;
+       font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         height: 100%;
         text-align: center;
+        color: #bb86fb;
     }
 
     .card {
@@ -43,7 +46,7 @@
 </style>
 
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
-    <nav class="navbar bg-primary navbar-expand-sm  navbar-dark">
+    <nav class="navbar  navbar-expand-sm  navbar-dark" style="background-color: #121212; float: right;">
         <h2>Know The Count</h2>
         <ul class="navbar-nav ">
             <li class="nav-item"> <a class="nav-link" href="#cnt">State wise count</a>
@@ -64,21 +67,21 @@
                 </h1>
                 <div
                     class="table-responsive table-responsive-xl table-responsive-md table-responsive-sm table-responsive-lg">
-                    <table class="table table-hover table-bordered">
+                    <table class="table table-hover">
                         <thead>
-                            <tr style="color:white;background-color: black;">
+                            <tr style="color:white;">
                                 <th scope="col">State</th>
                                 <th scope="col">Active</th>
                                 <th scope="col">Confirmed</th>
                                 <th scope="col">Deaths</th>
-                                <th scope="col">Deltaconfirmed</th>
-                                <th scope="col">Deltadeaths</th>
-                                <th scope="col">Deltarecovered</th>
-                                <th scope="col">Lastupdatedtime</th>
+                                <th scope="col">Delta-confirmed</th>
+                                <th scope="col">Delta-deaths</th>
+                                <th scope="col">Delta-recovered</th>
+                                <th scope="col">Last-updated-time</th>
                                 <th scope="col">Recovered</th>
                             </tr>
                         </thead>
-                        <tbody id="covid" style="color: azure;"></tbody>
+                        <tbody id="covid" style="color:white;"></tbody>
                     </table>
                 </div>
             </div>
@@ -100,31 +103,32 @@
         </section>
         <section id="ref">
             <div class="container">
-                <div class="card">
-                    <div class="card-header">Refrences</div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">HELPLINE NUMBERS [by State]<a
+                <div class="card text-white bg-dark mb-3">
+                    <div class="card-header" style="background-color: #bb86fb" ;>Refrences</div>
+                    <ul class="list-group list-group-flush" style="color: #bb86fb" ;>
+                        <li class="list-group-item">HELPLINE NUMBERS [by State]&nbsp;<a
                                 href="https://www.mohfw.gov.in/pdf/coronvavirushelplinenumber.pdf" target="_blank"
                                 rel="noopener noreferrer">https://www.mohfw.gov.in/pdf/coronvavirushelplinenumber.pdf</a>
                         </li>
-                        <li class="list-group-item">Ministry of Health and Family Welfare, Gov. of India<a
+                        <li class="list-group-item">Ministry of Health and Family Welfare, Gov. of India&nbsp;<a
                                 href="https://www.mohfw.gov.in/" target="_blank"
                                 rel="noopener noreferrer">https://www.mohfw.gov.in/</a>
                         </li>
-                        <li class="list-group-item">WHO : COVID-19 Home Page<a
+                        <li class="list-group-item">WHO : COVID-19 Home Page&nbsp;<a
                                 href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019" target="_blank"
                                 rel="noopener noreferrer">https://www.who.int/emergencies/diseases/novel-coronavirus-2019</a>
                         </li>
-                        <li class="list-group-item">CDC<a href="https://www.cdc.gov/coronavirus/2019-ncov/faq.html"
-                                target="_blank"
+                        <li class="list-group-item">CDC&nbsp;<a
+                                href="https://www.cdc.gov/coronavirus/2019-ncov/faq.html" target="_blank"
                                 rel="noopener noreferrer">https://www.cdc.gov/coronavirus/2019-ncov/faq.html</a>
                         </li>
-                        <li class="list-group-item">Crowdsourced list of Resources &amp; Essentials from across India<a
-                                href="https://bit.ly/covid19resourcelist" target="_blank"
+                        <li class="list-group-item">Crowdsourced list of Resources &amp; Essentials from across
+                            India&nbsp;<a href="https://bit.ly/covid19resourcelist" target="_blank"
                                 rel="noopener noreferrer">https://bit.ly/covid19resourcelist</a>
                         </li>
-                        <li class="list-group-item">COVID-19 Global Tracker<a href="https://coronavirus.thebaselab.com/"
-                                target="_blank" rel="noopener noreferrer">https://coronavirus.thebaselab.com/</a>
+                        <li class="list-group-item">COVID-19 Global Tracker&nbsp;<a
+                                href="https://coronavirus.thebaselab.com/" target="_blank"
+                                rel="noopener noreferrer">https://coronavirus.thebaselab.com/</a>
                         </li>
                     </ul>
                 </div>
