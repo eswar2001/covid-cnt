@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Resources</title>
+</head>
+
+<body>
+
+<div class="row" style="text-align: justify; align-content: space-around;" id="card">
+
+</div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
+        integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+<script>
+    $(document).ready(function () {
+       
+        $.getJSON("https://api.covid19india.org/resources/resources.json", function (data) {
+            var _res = data["resources"];
+            for(var i in _res){
+                console.log(_res[i]["nameoftheorganisation"]);
+            }
+            html = '';
+            for (var i in _res) {
+                html += ' <div class="col" style="padding:5%;"><div class="card" style="max-width: 500px;min-width: 400px;"><div class="card-body">' +
+                    '<h5 class="card-title">' +_res[i]["nameoftheorganisation"] + '</h5>';
+                html += '<h6 class="card-subtitle mb-2 text-muted">' + _res[i]["city"] + ',' + _res[i]["state"] +
+                    '</h6> <p class = "card-text" > '+_res[i]["descriptionandorserviceprovided"]+'</p><a href="'+_res[i]["contact"]+'" class="card-link">website</a ><p>' + _res[i]["phonenumber"] + '</p><p>' + _res[i]["category"] + '</p></div></div></div>';
+          }
+          $("#card").append(html);
+
+
+
+
+
+
+
+
+
+
+
+
+          delete(data);
+          delete(_res);
+          delete(html);   
+        });
+        alert("Hey! there this is a lot of data so feel free to use browser ctrl+F option to find your city and requirement");
+    });
+</script>
+
+</html>

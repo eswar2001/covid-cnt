@@ -49,5 +49,9 @@ $(document).ready(function () {
                 '</div>' + '</div>  ';
         }
         $("#covid-daily").append(data);
+        delete(data);
     });
+
 });
+
+           
