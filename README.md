@@ -4,3 +4,8 @@
         and then it displays in the above web application.I have built this application upon request from an hospital in my
         village and I cannot disclose its name.Here maps iframe was awesome  https://app.developer.here.com/coronavirus/ .
                                       NOTE:- I am not funded.Iam doing it as openSourceContribution 
+                                      
+                                      
+                                      
+                                      
+                                      Feel free to improve,innovate and distribute :P
