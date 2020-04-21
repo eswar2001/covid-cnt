@@ -28,7 +28,7 @@
             var _D;
             $.getJSON("https://api.covid19india.org/data.json", function (data) {
                 _D = data.cases_time_series;
-                console.log(_D);
+                // console.log(_D);
                 var options = {
                     zoomEnabled: true,
                     animationEnabled: true,
@@ -173,7 +173,7 @@
                         y: parseInt(_D[i]["dailyrecovered"])
                     });
                 }
-                console.log(options);
+                // console.log(options);
                 $("#comfirmed-recovered").CanvasJSChart(options);
                 $("#chartContainer").CanvasJSChart(option2);
 
