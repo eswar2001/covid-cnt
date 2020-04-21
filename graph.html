@@ -1,0 +1,200 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <style>
+        body {
+            width: 100%;
+            height: 100%;
+
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var months = [
+                'January',
+                'February',
+                'March',
+                'April',
+                'May',
+                'June',
+                'July',
+                'August',
+                'September',
+                'October',
+                'November',
+                'December'
+            ];
+            var _D;
+            $.getJSON("https://api.covid19india.org/data.json", function (data) {
+                _D = data.cases_time_series;
+                console.log(_D);
+                var options = {
+                    zoomEnabled: true,
+                    animationEnabled: true,
+                    theme: "dark2",
+                    title: {
+                        text: "India COVID-19 Stats(DayWise)"
+                    },
+                    axisX: {
+                        valueFormatString: "DD MMM"
+                    },
+                    axisY: {
+                        title: "Number of Cases",
+                        minimum: 0
+                    },
+                    toolTip: {
+                        shared: true
+                    },
+                    legend: {
+                        cursor: "pointer",
+                        verticalAlign: "bottom",
+                        horizontalAlign: "left",
+                        dockInsidePlotArea: true,
+                        itemclick: toogleDataSeries
+                    },
+                    data: [{
+                            type: "line",
+                            showInLegend: true,
+                            name: "Confirmed",
+                            markerType: "square",
+                            xValueFormatString: "DD MMM, YYYY",
+                            color: "#F08080",
+                            yValueFormatString: "#,##0",
+                            dataPoints: [
+
+                            ]
+                        },
+                        {
+                            type: "line",
+                            showInLegend: true,
+                            name: "Recovered",
+                            lineDashType: "dash",
+                            yValueFormatString: "#,##0",
+                            dataPoints: [
+
+                            ]
+                        },
+                        {
+                            type: "line",
+                            showInLegend: true,
+                            name: "Died",
+                            lineDashType: "dash",
+                            yValueFormatString: "#,##0",
+                            dataPoints: [
+
+                            ]
+                        }
+                    ]
+                };
+                var option2 = {
+                    zoomEnabled: true,
+                    animationEnabled: true,
+                    theme: "dark2",
+                    title: {
+                        text: "COVID 19 IND",
+                        fontSize: 22
+                    },
+                    axisY: {
+                        title: "Number of Cases",
+                        includeZero: true,
+                    },
+                    axisX: {
+                        interval: 2,
+                        intervalType: "week",
+                        valueFormatString: "DD-MMM",
+                        labelAngle: -45
+                    },
+                    toolTip: {
+                        shared: true
+                    },
+                    legend: {
+                        cursor: "pointer",
+                        verticalAlign: "bottom",
+                        horizontalAlign: "left",
+                        dockInsidePlotArea: true,
+                        itemclick: toogleDataSeries
+                    },
+                    data: [{
+                            type: "spline",
+                            name: "Total Confirmed",
+                            markerType: "square",
+                            xValueFormatString: "DD MMM, YYYY",
+                            color: "#F08080",
+                            showInLegend: true,
+                            // toolTipContent: "{x}: {y} People/Day",
+                            dataPoints: [
+
+                            ]
+                        }, {
+                            type: "spline",
+                            name: "Total Recovered",
+                            showInLegend: true,
+                            // toolTipContent: "{x}: {y} People/Day",
+                            dataPoints: []
+                        },
+                        {
+                            type: "spline",
+                            name: "Total Died",
+                            showInLegend: true,
+                            lineDashType: "dash",
+                            // toolTipContent: "{x}: {y} People/Day",
+                            dataPoints: []
+                        }
+                    ]
+                }
+
+                for (var i in _D) {
+                    var s = _D[i]["date"];
+                    s += ",2020";
+                    option2.data[0].dataPoints.push({
+                        x: new Date(s),
+                        y: parseInt(_D[i]["totalconfirmed"])
+                    });
+                    option2.data[1].dataPoints.push({
+                        x: new Date(s),
+                        y: parseInt(_D[i]["totalrecovered"])
+                    });
+                    option2.data[2].dataPoints.push({
+                        x: new Date(s),
+                        y: parseInt(_D[i]["totaldeceased"])
+                    });
+                    options.data[2].dataPoints.push({
+                        x: new Date(s),
+                        y: parseInt(_D[i]["totaldeceased"])
+                    });
+                    // var res = _D[i]["date"].split(" ");
+                    options.data[0].dataPoints.push({
+                        x: new Date(s),
+                        y: parseInt(_D[i]["dailyconfirmed"])
+                    });
+                    options.data[1].dataPoints.push({
+                        x: new Date(s),
+                        y: parseInt(_D[i]["dailyrecovered"])
+                    });
+                }
+                console.log(options);
+                $("#comfirmed-recovered").CanvasJSChart(options);
+                $("#chartContainer").CanvasJSChart(option2);
+
+                function toogleDataSeries(e) {
+                    if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                        e.dataSeries.visible = false;
+                    } else {
+                        e.dataSeries.visible = true;
+                    }
+                    e.chart.render();
+                }
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+    <div id="comfirmed-recovered" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+    <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+</body>
+
+</html>
