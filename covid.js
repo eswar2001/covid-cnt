@@ -60,13 +60,22 @@ window.onload = function () {
         animationEnabled: false,
         theme: "dark2",
         title: {
-            text: "Daily Increment"
+            text: "Daily Confirmed "
         },
         axisY: {
-            includeZero: false
+            includeZero: false,
+            title: "Confirmed On day"
+        },
+        axisX: {
+            intervalType: "week",
+            valueFormatString: "DD-MMM",
+        },
+        legend: {
+            verticalAlign: "bottom",
+            horizontalAlign: "center"
         },
         data: [{
-            type: "line",
+            type: "column",
             indexLabelFontSize: 16,
             dataPoints: []
         }]
@@ -74,10 +83,12 @@ window.onload = function () {
     $.getJSON("https://api.covid19india.org/data.json", function (data) {
         _D = data.cases_time_series;
         for (var i in _D) {
+            var s = _D[i]["date"];
+            s += ",2020";
             chart.data[0].dataPoints.push({
-                y: parseInt(_D[i]["dailyconfirmed"])
+                y: parseInt(_D[i]["dailyconfirmed"]),
+                x: new Date(s)
             });
-
             chart.render();
         }
     });
