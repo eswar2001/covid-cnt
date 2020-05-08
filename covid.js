@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     var _India;
     var _D;
     $.getJSON("https://api.covid19india.org/data.json", function (data) {
@@ -6,11 +7,9 @@ $(document).ready(function () {
         _India = data.statewise;
         data = ''
         for (var i in _India) {
-            // console.log('hi');
-
             if (_India[i]["deltaconfirmed"] > 0) {
                 data += ' <tr class="bg-danger">' +
-                    '<td>' + _India[i]["state"] + '</td>' +
+                    '<td><a  data-toggle="modal" data-target="#' + _India[i]["state"].split(/\s/).join('') + '">' + _India[i]["state"] + '</a></td>' +
                     '<td>' + _India[i]["active"] + '</td>' +
                     '<td>' + _India[i]["confirmed"] + '</td>' +
                     '<td>' + _India[i]["deaths"] + '</td>' +
@@ -22,7 +21,7 @@ $(document).ready(function () {
                     '</tr>';
             } else {
                 data += ' <tr class="bg-success">' +
-                    '<td>' + _India[i]["state"] + '</td>' +
+                    '<td><a data-toggle="modal" data-target="#' + _India[i]["state"].split(/\s/).join('') + '">' + _India[i]["state"] + '</a></td>' +
                     '<td>' + _India[i]["active"] + '</td>' +
                     '<td>' + _India[i]["confirmed"] + '</td>' +
                     '<td>' + _India[i]["deaths"] + '</td>' +
@@ -33,25 +32,54 @@ $(document).ready(function () {
                     '<td>' + _India[i]["recovered"] + '</td>' +
                     '</tr>';
             }
-
-
         }
         $("#covid").append(data);
-        data = ''
-        for (var i in _D) {
-            data += '<div style="background-color:#bb86fb;color:#121212;"; class="card border-primary mb-3"><div class="card-header">' + _D[i]["date"] + '</div><div class="card-body text-primary">' +
-                '&nbsp;&nbsp;<span  style="color:#121212;"><strong>deceased on date: </strong></span>&nbsp;&nbsp;' + _D[i]["dailydeceased"] +
-                ',&nbsp;&nbsp;<span  style="color:#121212;"><strong>confirmed on date:</strong></span>&nbsp;&nbsp;' + _D[i]["dailyconfirmed"] +
-                ',&nbsp;&nbsp;<span  style="color:#121212;"><strong>recovered on date:</strong></span>&nbsp;&nbsp;' + _D[i]["dailyrecovered"] +
-                ',&nbsp;&nbsp;<span  style="color:#121212;"><strong>total confirmed:  </strong></span>&nbsp;&nbsp;' + _D[i]["totalconfirmed"] +
-                ',&nbsp;&nbsp;<span  style="color:#121212;"><strong>total deceased:   </strong></span>&nbsp;&nbsp;' + _D[i]["totaldeceased"] +
-                ',&nbsp;&nbsp;<span  style="color:#121212;"><strong>total recovered:  </strong></span>&nbsp;&nbsp;' + _D[i]["totalrecovered"] +
-                '</div>' + '</div>  ';
-        }
-        $("#covid-daily").append(data);
         delete(data);
     });
+    $.getJSON("https://api.covid19india.org/state_district_wise.json", function (data) {
+        var _state = data;
+        data = '';
+        for (var i in _state) {
+            data += '<div id="' + i.split(/\s/).join('') + '" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true"> <div class="modal-dialog" role="document"><div class="modal-content" style="text-justify: auto; text-align: center; align-items: center;align-self:center;"><div class="modal-header"> <h5 class="modal-title">' + i + '</h5></div>';
+            data += '<div class="modal-body"><table class="table table-hover"><thead><tr><td>District</td><td>Confirmed</td></tr></thead><tbody>';
+            for (var j in _state[i].districtData) {
+                data += '<tr><td><strong style="color:#000000">' + j + '</strong>&nbsp;&nbsp;</td><td>' +
+                    _state[i].districtData[j]["confirmed"] + '</td></tr>';
+            }
+            data += '</tbody></table></div><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></div></div></div>';
+        }
+        $("#card-modal").append(data);
+        delete(data);
+    });
+    $('.modal').modal();
 
 });
+window.onload = function () {
 
-           
+    var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: false,
+        theme: "dark2",
+        title: {
+            text: "Daily Increment"
+        },
+        axisY: {
+            includeZero: false
+        },
+        data: [{
+            type: "line",
+            indexLabelFontSize: 16,
+            dataPoints: []
+        }]
+    });
+    $.getJSON("https://api.covid19india.org/data.json", function (data) {
+        _D = data.cases_time_series;
+        for (var i in _D) {
+            chart.data[0].dataPoints.push({
+                y: parseInt(_D[i]["dailyconfirmed"])
+            });
+
+            chart.render();
+        }
+    });
+    chart.render();
+}
