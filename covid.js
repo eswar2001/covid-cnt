@@ -123,4 +123,7 @@ window.onload = function () {
         }
     });
     chart.render();
+    $(window).resize(function () {
+        drawVisualization();
+    });
 }

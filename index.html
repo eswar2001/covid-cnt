@@ -1,15 +1,15 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="./main.css">
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <link rel="stylesheet" href="./main.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Know The Count</title>
 
@@ -21,14 +21,22 @@
         alert("This alert box was called with the onload event");
     </script>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js'></script>
+    <script type='text/javascript' src='http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js'></script>
 
+    <link rel="stylesheet" href="node_modules/leaflet/dist/leaflet.css">
+
+    <script src="node_modules/echarts/dist/echarts.js"></script>
+    <script src="node_modules/leaflet/dist/leaflet.js"></script>
+    <script src="node_modules/echarts-leaflet/dist/echarts-leaflet.js"></script>
 </head>
 
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
-    <nav class="navbar" style="align-content:space-around;">
+    <nav class="navbar" style="align-content: space-around;">
         <span class="nav-item dropdown">
-
-            <h2 class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">Know The Count</h2>
+            <h2 class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+                Know The Count
+            </h2>
 
             <div class="dropdown-menu">
                 <a class="nav-link" href="./graph.html">Get Graphs</a>
@@ -43,17 +51,142 @@
         <a href="./graph.html">
             <h3>Get Graphs</h3>
         </a>
-        <div class="container" id="chartContainer" style="height: 370px; width: 100%;"></div>
+
+        <section style="padding-top: 25px;">
+            <link rel="stylesheet" href="node_modules/leaflet/dist/leaflet.css">
+
+            <script src="node_modules/echarts/dist/echarts.js"></script>
+            <script src="node_modules/leaflet/dist/leaflet.js"></script>
+            <script src="node_modules/echarts-leaflet/dist/echarts-leaflet.js"></script>
+            <script src="node_modules/jquery/dist/jquery.js"></script>
+            <div class="container" id="main" style="height:600px;width: 100%;color: black;"></div>
+
+            <script>
+                var dom = document.getElementById('main');
+                var chart = echarts.init(dom);
+
+                // https://github.com/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv
+                $.get('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv',
+                    function (data) {
+                        var lines = data.split('\n');
+
+                        var result = [];
+                        for (var i = 1; i < lines.length; ++i) {
+                            var columns = lines[i].split(',');
+
+                            for (var j = 4; j < columns.length; ++j) {
+                                var value = [
+                                    columns[3],
+                                    columns[2],
+                                    columns[j],
+                                    columns[0] + ' ' + columns[1]
+                                ];
+                                var id = j - 4;
+                                if (result[id]) {
+                                    result[id].push(value);
+                                } else {
+                                    result[id] = [value];
+                                }
+                            }
+                        }
+
+                        var options = result.map(function (day) {
+                            return {
+                                series: {
+                                    data: day
+                                }
+                            };
+                        })
+
+                        chart.setOption({
+                            timeline: {
+                                axisType: 'category',
+                                data: lines[0].split(',').slice(4),
+                                autoPlay: true,
+                                playInterval: 500,
+                                symbolSize: 4,
+                                tooltip: {
+                                    formatter: function (params) {
+                                        return params.name;
+                                    }
+                                },
+                                itemStyle: {
+                                    color: '#ccc'
+                                },
+                                lineStyle: {
+                                    color: '#eee'
+                                },
+                                label: {
+                                    color: '#999'
+                                },
+                                checkpointStyle: {
+                                    color: 'red'
+                                },
+                                controlStyle: {
+                                    borderColor: '#bbb'
+                                }
+                            },
+                            options: options
+                        })
+                    });
+
+                chart.setOption({
+                    baseOption: {
+                        tooltip: {
+                            show: true,
+                            formatter: function (params) {
+                                return params.value[3] + ':' + params.value[2];
+                            }
+                        },
+                        series: [{
+                            type: 'scatter',
+                            animation: false,
+                            coordinateSystem: 'leaflet',
+                            data: [],
+                            symbolSize: function (value) {
+                                return value[2] > 0 ? Math.log(value[2]) * 3 : 0;
+                            },
+                            itemStyle: {
+                                color: 'red',
+                                borderWidth: 2,
+                                borderColor: 'rgba(255, 255, 255, 0.5)'
+                            }
+                        }],
+                        visualMap: {
+                            type: 'continuous',
+                            min: 0,
+                            max: 300,
+                            inRange: {
+                                color: ['orange', 'red'],
+                                opacity: [0.5, 0.8]
+                            },
+                            dimension: 2
+                        },
+                        leaflet: {
+                            center: [0, 40],
+                            roam: true,
+                            tiles: [{
+                                urlTemplate: 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png'
+                            }]
+                        }
+                    }
+                });
+            </script>
+        </section>
+        <section style="padding:10px;">
+            <div class="container" id="chartContainer" style="height: 370px; width: 100%;"></div>
+        </section>
         <section id="cnt">
             <div class="container text-capitalize align-content-center">
-                <h1 style="padding: 5%;">State Wide Analysis
-                    <hr>
+                <h1 style="padding: 5%;">
+                    State Wide Analysis
+                    <hr />
                 </h1>
                 <div
                     class="table-responsive table-responsive-xl table-responsive-md table-responsive-sm table-responsive-lg">
                     <table class="table table-hover">
                         <thead>
-                            <tr style="color:white;">
+                            <tr style="color: white;">
                                 <th scope="col">State</th>
                                 <th scope="col">Active</th>
                                 <th scope="col">Confirmed</th>
@@ -65,46 +198,56 @@
                                 <th scope="col">Recovered</th>
                             </tr>
                         </thead>
-                        <tbody id="covid" style="color:white;"></tbody>
+                        <tbody id="covid" style="color: white;"></tbody>
                     </table>
                 </div>
             </div>
         </section>
-
         <section>
-            <div id="Container" style="padding-bottom:5%; position:relative; display:block; width: 100%">
+            <div id="Container" style="
+            padding-bottom: 5%;
+            position: relative;
+            display: block;
+            width: 100%;
+          ">
                 <iframe id="ViostreamIframe" width="100%" height="100%" style="min-height: 800px; max-height: 100%;"
                     src="https://app.developer.here.com/coronavirus/" frameborder="0" allowfullscreen=""
-                    style="position:absolute; top:0; left: 0"></iframe>
+                    style="position: absolute; top: 0; left: 0;"></iframe>
             </div>
         </section>
         <section id="ref">
             <div class="container">
                 <div class="card text-white bg-dark mb-3">
-                    <div class="card-header" style="background-color: #bb86fb" ;>Refrences</div>
-                    <ul class="list-group list-group-flush" style="color: #bb86fb" ;>
-                        <li class="list-group-item">HELPLINE NUMBERS [by State]&nbsp;<a
+                    <div class="card-header" style="background-color: #bb86fb;" ;>
+                        Refrences
+                    </div>
+                    <ul class="list-group list-group-flush" style="color: #bb86fb;" ;>
+                        <li class="list-group-item">
+                            HELPLINE NUMBERS [by State]&nbsp;<a
                                 href="https://www.mohfw.gov.in/pdf/coronvavirushelplinenumber.pdf" target="_blank"
                                 rel="noopener noreferrer">https://www.mohfw.gov.in/pdf/coronvavirushelplinenumber.pdf</a>
                         </li>
-                        <li class="list-group-item">Ministry of Health and Family Welfare, Gov. of India&nbsp;<a
+                        <li class="list-group-item">
+                            Ministry of Health and Family Welfare, Gov. of India&nbsp;<a
                                 href="https://www.mohfw.gov.in/" target="_blank"
                                 rel="noopener noreferrer">https://www.mohfw.gov.in/</a>
                         </li>
-                        <li class="list-group-item">WHO : COVID-19 Home Page&nbsp;<a
+                        <li class="list-group-item">
+                            WHO : COVID-19 Home Page&nbsp;<a
                                 href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019" target="_blank"
                                 rel="noopener noreferrer">https://www.who.int/emergencies/diseases/novel-coronavirus-2019</a>
                         </li>
-                        <li class="list-group-item">CDC&nbsp;<a
-                                href="https://www.cdc.gov/coronavirus/2019-ncov/faq.html" target="_blank"
+                        <li class="list-group-item">
+                            CDC&nbsp;<a href="https://www.cdc.gov/coronavirus/2019-ncov/faq.html" target="_blank"
                                 rel="noopener noreferrer">https://www.cdc.gov/coronavirus/2019-ncov/faq.html</a>
                         </li>
-                        <li class="list-group-item">Crowdsourced list of Resources &amp; Essentials from across
+                        <li class="list-group-item">
+                            Crowdsourced list of Resources &amp; Essentials from across
                             India&nbsp;<a href="https://bit.ly/covid19resourcelist" target="_blank"
                                 rel="noopener noreferrer">https://bit.ly/covid19resourcelist</a>
                         </li>
-                        <li class="list-group-item">COVID-19 Global Tracker&nbsp;<a
-                                href="https://coronavirus.thebaselab.com/" target="_blank"
+                        <li class="list-group-item">
+                            COVID-19 Global Tracker&nbsp;<a href="https://coronavirus.thebaselab.com/" target="_blank"
                                 rel="noopener noreferrer">https://coronavirus.thebaselab.com/</a>
                         </li>
                     </ul>
@@ -112,13 +255,11 @@
             </div>
         </section>
     </div>
-    <div id="card-modal">
-
-    </div>
+    <div id="card-modal"></div>
     <button class="mdc-fab app-fab--absolute" aria-label="Favorite">
-        <a href="#cnt"> <span class="mdc-fab__icon material-icons">keyboard_arrow_up</span></a>
+        <a href="#cnt">
+            <span class="mdc-fab__icon material-icons">keyboard_arrow_up</span></a>
     </button>
-
 </body>
 
 </html>
