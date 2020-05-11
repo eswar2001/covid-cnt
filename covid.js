@@ -82,7 +82,9 @@ $(document).ready(function () {
         delete(data);
     });
     $('.modal').modal();
-
+    $.getJSON('https://corona.lmao.ninja/v2/countries', function (data) {
+        console.log(data);
+    });
 });
 window.onload = function () {
 
