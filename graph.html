@@ -25,6 +25,44 @@
                 'November',
                 'December'
             ];
+            var chart = new CanvasJS.Chart("chart", {
+                animationEnabled: false,
+                theme: "dark2",
+                title: {
+                    text: "Daily Confirmed "
+                },
+                axisY: {
+                    includeZero: false,
+                    title: "Confirmed On day"
+                },
+                axisX: {
+                    intervalType: "week",
+                    valueFormatString: "DD-MMM",
+                },
+                legend: {
+                    verticalAlign: "bottom",
+                    horizontalAlign: "center"
+                },
+                data: [{
+                    type: "column",
+                    indexLabelFontSize: 16,
+                    dataPoints: []
+                }]
+            });
+            $.getJSON("https://api.covid19india.org/data.json", function (data) {
+                _D = data.cases_time_series;
+                for (var i in _D) {
+                    var s = _D[i]["date"];
+                    s += ",2020";
+                    chart.data[0].dataPoints.push({
+                        y: parseInt(_D[i]["dailyconfirmed"]),
+                        x: new Date(s)
+                    });
+                    chart.render();
+                }
+            });
+            chart.render();
+
             var _D;
             $.getJSON("https://api.covid19india.org/data.json", function (data) {
                 _D = data.cases_time_series;
@@ -190,11 +228,16 @@
 </head>
 
 <body>
-    <div id="chartContainer" style="height: 370px; max-width: 920px; margin: 1px auto;"></div>
+
+    <div class="container" id="chart" style="height: 370px; width: 100%;"></div>
     <div style="height:100px;">
 
     </div>
-    <div id="comfirmed-recovered" style="height: 370px; max-width: 920px; margin: 1px auto;"></div>
+    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+    <div style="height:100px;">
+
+    </div>
+    <div id="comfirmed-recovered" style="height: 370px; width: 100%;"></div>
     <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
     <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
 </body>

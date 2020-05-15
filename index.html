@@ -2,265 +2,356 @@
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
-    <link rel="stylesheet" href="./main.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Know The Count</title>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
-        integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="./covid.js">
-        alert("This alert box was called with the onload event");
-    </script>
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <!-- <script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js'></script> -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    Covid 19 Dashboard
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css"
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <!-- CSS Files -->
+  <link href="assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+  <link href="assets/main/Main.css" rel="stylesheet" />
+  <!--   Core JS Files   -->
+  <script src="assets/js/core/jquery.min.js"></script>
+  <script src="assets/js/core/popper.min.js"></script>
+  <script src="assets/js/core/bootstrap-material-design.min.js"></script>
+  <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <!-- Plugin for the momentJs  -->
+  <script src="assets/js/plugins/moment.min.js"></script>
+  <!--  Plugin for Sweet Alert -->
+  <script src="assets/js/plugins/sweetalert2.js"></script>
+  <!-- Forms Validations Plugin -->
+  <script src="assets/js/plugins/jquery.validate.min.js"></script>
+  <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+  <script src="assets/js/plugins/jquery.bootstrap-wizard.js"></script>
+  <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+  <script src="assets/js/plugins/bootstrap-selectpicker.js"></script>
+  <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+  <script src="assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
+  <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
+  <script src="assets/js/plugins/jquery.dataTables.min.js"></script>
+  <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+  <script src="assets/js/plugins/bootstrap-tagsinput.js"></script>
+  <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+  <script src="assets/js/plugins/jasny-bootstrap.min.js"></script>
+  <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
+  <script src="assets/js/plugins/fullcalendar.min.js"></script>
+  <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+  <script src="assets/js/plugins/jquery-jvectormap.js"></script>
+  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+  <script src="assets/js/plugins/nouislider.min.js"></script>
+  <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+  <!-- Library for adding dinamically elements -->
+  <script src="assets/js/plugins/arrive.min.js"></script>
+  <!-- Chartist JS -->
+  <script src="assets/js/plugins/chartist.min.js"></script>
+  <!--  Notifications Plugin    -->
+  <script src="assets/js/plugins/bootstrap-notify.js"></script>
+  <script src="assets/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
+  <script src="assets/main/Main.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css"
+    integrity="sha512-wcw6ts8Anuw10Mzh9Ytw4pylW8+NAD4ch3lqm9lzAsTxg0GFeJgoAtxuCLREZSC5lUXdVyo/7yfsqFjQ4S+aKw=="
+    crossorigin="" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.0.4/echarts-en.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.js"></script>
+  <script src="echarts-leaflets.js">
+  </script>
 </head>
 
-<body data-spy="scroll" data-target=".navbar" data-offset="50">
-    <nav class="navbar" style="align-content: space-around;">
-        <span class="nav-item dropdown">
-            <h2 class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-                Know The Count
-            </h2>
+<body class="">
+  <div class="wrapper ">
+    <div class="card">
+      <div class="card-body" id="main" style="height:600px;width: 100%;color: black;"></div>
+      <script>
+        var dom = document.getElementById('main');
+        var chart = echarts.init(dom);
 
-            <div class="dropdown-menu" style="z-index: 999999;">
-                <a class="nav-link" href="./graph.html">Get Graphs</a>
-                <a class="nav-link" href="#cnt">State wise count</a>
-                <a class="nav-link" href="#ViostreamIframe">Coverage Map</a>
-                <a class="nav-link" href="#ref">Refrences</a>
-                <a class="nav-link" target="_blank" href="./resources.html">Resources</a>
-            </div>
-        </span>
-    </nav>
-    <div class="container-fluid">
-        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-        <lottie-player src="https://assets7.lottiefiles.com/packages/lf20_LCtDAM.json" mode="bounce"
-            background="transparent" speed="1" style="height:100%;" loop autoplay>
-        </lottie-player>
+        // https://github.com/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv
+        $.get(
+          'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv',
+          function (data) {
+            var lines = data.split('\n');
+
+            var result = [];
+            for (var i = 1; i < lines.length; ++i) {
+              var columns = lines[i].split(',');
+
+              for (var j = 4; j < columns.length; ++j) {
+                var value = [
+                  columns[3],
+                  columns[2],
+                  columns[j],
+                  columns[0] + ' ' + columns[1]
+                ];
+                var id = j - 4;
+                if (result[id]) {
+                  result[id].push(value);
+                } else {
+                  result[id] = [value];
+                }
+              }
+            }
+
+            var options = result.map(function (day) {
+              return {
+                series: {
+                  data: day
+                }
+              };
+            })
+
+            chart.setOption({
+              timeline: {
+                axisType: 'category',
+                data: lines[0].split(',').slice(4),
+                autoPlay: true,
+                playInterval: 500,
+                symbolSize: 4,
+                tooltip: {
+                  formatter: function (params) {
+                    return params.name;
+                  }
+                },
+                itemStyle: {
+                  color: '#fff'
+                },
+                lineStyle: {
+                  color: '#eee'
+                },
+                label: {
+                  color: '#999'
+                },
+                checkpointStyle: {
+                  color: 'red'
+                },
+                controlStyle: {
+                  borderColor: '#bbb'
+                }
+              },
+              options: options
+            })
+          });
+
+        chart.setOption({
+          baseOption: {
+            tooltip: {
+              show: true,
+              formatter: function (params) {
+                return params.value[3] + ':' + params.value[2];
+              }
+            },
+            series: [{
+              type: 'scatter',
+              animation: false,
+              coordinateSystem: 'leaflet',
+              data: [],
+              symbolSize: function (value) {
+                return value[2] > 0 ? Math.log(value[2]) * 3 : 0;
+              },
+              itemStyle: {
+                color: 'red',
+                borderWidth: 2,
+                borderColor: 'rgba(255, 255, 255, 0.5)'
+              }
+            }],
+            visualMap: {
+              type: 'continuous',
+              min: 0,
+              max: 300,
+              inRange: {
+                color: ['orange', 'red'],
+                opacity: [0.5, 0.8]
+              },
+              dimension: 2
+            },
+            leaflet: {
+              center: [40, 40],
+              roam: false,
+              tiles: [{
+                urlTemplate: ' https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}.png'
+
+              }]
+            }
+          }
+        });
+      </script>
     </div>
-    <div class="backdrop">
-        <a href="./graph.html">
-            <h3>Get Graphs</h3>
-        </a>
-
-        <section style="padding-top: 25px;">
-            <link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css"
-                integrity="sha512-wcw6ts8Anuw10Mzh9Ytw4pylW8+NAD4ch3lqm9lzAsTxg0GFeJgoAtxuCLREZSC5lUXdVyo/7yfsqFjQ4S+aKw=="
-                crossorigin="" />
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.0.4/echarts-en.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.js"></script>
-            <script src="echarts-leaflets.js">
-            </script>
-            <!-- <script src="./node_modules/jquery/dist/jquery.js"></script> -->
-            <div class="container" id="main" style="height:600px;width: 100%;color: black;"></div>
-
-            <script>
-                var dom = document.getElementById('main');
-                var chart = echarts.init(dom);
-
-                // https://github.com/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv
-                $.get('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv',
-                    function (data) {
-                        var lines = data.split('\n');
-
-                        var result = [];
-                        for (var i = 1; i < lines.length; ++i) {
-                            var columns = lines[i].split(',');
-
-                            for (var j = 4; j < columns.length; ++j) {
-                                var value = [
-                                    columns[3],
-                                    columns[2],
-                                    columns[j],
-                                    columns[0] + ' ' + columns[1]
-                                ];
-                                var id = j - 4;
-                                if (result[id]) {
-                                    result[id].push(value);
-                                } else {
-                                    result[id] = [value];
-                                }
-                            }
-                        }
-
-                        var options = result.map(function (day) {
-                            return {
-                                series: {
-                                    data: day
-                                }
-                            };
-                        })
-
-                        chart.setOption({
-                            timeline: {
-                                axisType: 'category',
-                                data: lines[0].split(',').slice(4),
-                                autoPlay: true,
-                                playInterval: 500,
-                                symbolSize: 4,
-                                tooltip: {
-                                    formatter: function (params) {
-                                        return params.name;
-                                    }
-                                },
-                                itemStyle: {
-                                    color: '#fff'
-                                },
-                                lineStyle: {
-                                    color: '#eee'
-                                },
-                                label: {
-                                    color: '#999'
-                                },
-                                checkpointStyle: {
-                                    color: 'red'
-                                },
-                                controlStyle: {
-                                    borderColor: '#bbb'
-                                }
-                            },
-                            options: options
-                        })
-                    });
-
-                chart.setOption({
-                    baseOption: {
-                        tooltip: {
-                            show: true,
-                            formatter: function (params) {
-                                return params.value[3] + ':' + params.value[2];
-                            }
-                        },
-                        series: [{
-                            type: 'scatter',
-                            animation: false,
-                            coordinateSystem: 'leaflet',
-                            data: [],
-                            symbolSize: function (value) {
-                                return value[2] > 0 ? Math.log(value[2]) * 3 : 0;
-                            },
-                            itemStyle: {
-                                color: 'red',
-                                borderWidth: 2,
-                                borderColor: 'rgba(255, 255, 255, 0.5)'
-                            }
-                        }],
-                        visualMap: {
-                            type: 'continuous',
-                            min: 0,
-                            max: 300,
-                            inRange: {
-                                color: ['orange', 'red'],
-                                opacity: [0.5, 0.8]
-                            },
-                            dimension: 2
-                        },
-                        leaflet: {
-                            center: [0, 40],
-                            roam: true,
-                            tiles: [{
-                                    urlTemplate: ' https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}.png'
-                                    // urlTemplate: 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png'
-                                    // urlTemplate: 'https://a.tile.openstreetmap.org/${z}/${x}/${y}.png'
-                                }
-                                // , {
-                                //     urlTemplate: 'https://c.tile.openstreetmap.org/${z}/${x}/${y}.png'
-                                // }, {
-                                //     urlTemplate: 'https://b.tile.openstreetmap.org/${z}/${x}/${y}.png'
-                                // }
-                            ]
-                        }
-                    }
-                });
-            </script>
-        </section>
-
-        <section style="padding:10px;">
-            <div class="container" id="chartContainer" style="height: 370px; width: 100%;"></div>
-        </section>
-        <section id="cnt">
-            <div class="container text-capitalize align-content-center">
-                <h1 style="padding: 5%;">
-                    State Wide Analysis
-                    <hr />
-                </h1>
-                <div
-                    class="table-responsive table-responsive-xl table-responsive-md table-responsive-sm table-responsive-lg">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr style="color: white;">
-                                <th scope="col">State</th>
-                                <th scope="col">Active</th>
-                                <th scope="col">Confirmed</th>
-                                <th scope="col">Deaths</th>
-                                <th scope="col">Delta-confirmed</th>
-                                <th scope="col">Delta-deaths</th>
-                                <th scope="col">Delta-recovered</th>
-                                <th scope="col">Last-updated-time</th>
-                                <th scope="col">Recovered</th>
-                            </tr>
-                        </thead>
-                        <tbody id="covid" style="color: white;"></tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <section id="ref">
-            <div class="container">
-                <div class="card text-white bg-dark mb-3">
-                    <div class="card-header" style="background-color: #bb86fb;" ;>
-                        Refrences
-                    </div>
-                    <ul class="list-group list-group-flush" style="color: #bb86fb;" ;>
-                        <li class="list-group-item">
-                            HELPLINE NUMBERS [by State]&nbsp;<a
-                                href="https://www.mohfw.gov.in/pdf/coronvavirushelplinenumber.pdf" target="_blank"
-                                rel="noopener noreferrer">https://www.mohfw.gov.in/pdf/coronvavirushelplinenumber.pdf</a>
-                        </li>
-                        <li class="list-group-item">
-                            Ministry of Health and Family Welfare, Gov. of India&nbsp;<a
-                                href="https://www.mohfw.gov.in/" target="_blank"
-                                rel="noopener noreferrer">https://www.mohfw.gov.in/</a>
-                        </li>
-                        <li class="list-group-item">
-                            WHO : COVID-19 Home Page&nbsp;<a
-                                href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019" target="_blank"
-                                rel="noopener noreferrer">https://www.who.int/emergencies/diseases/novel-coronavirus-2019</a>
-                        </li>
-                        <li class="list-group-item">
-                            CDC&nbsp;<a href="https://www.cdc.gov/coronavirus/2019-ncov/faq.html" target="_blank"
-                                rel="noopener noreferrer">https://www.cdc.gov/coronavirus/2019-ncov/faq.html</a>
-                        </li>
-                        <li class="list-group-item">
-                            Crowdsourced list of Resources &amp; Essentials from across
-                            India&nbsp;<a href="https://bit.ly/covid19resourcelist" target="_blank"
-                                rel="noopener noreferrer">https://bit.ly/covid19resourcelist</a>
-                        </li>
-                        <li class="list-group-item">
-                            COVID-19 Global Tracker&nbsp;<a href="https://coronavirus.thebaselab.com/" target="_blank"
-                                rel="noopener noreferrer">https://coronavirus.thebaselab.com/</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+    <div class="row" style="justify-content: space-around;">
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="card">
+          <h2 class="display-4">Covid 19 stats in <strong>India</strong></h2>
+        </div>
+      </div>
+      <div class="col-12 btn-group btn-group-sm" style="justify-content: space-evenly;" role="group">
+        <button type="button" class="btn btn-primary btn-lg" target="_blank" aria-pressed="true"
+          onclick="window.location.href='./graph.html'">Get
+          Graphs</button>
+        <button type="button" class="btn btn-danger btn-lg" target="_blank" aria-pressed="true"
+          onclick="window.location.href='./resources.html'">Resources</button>
+      </div>
     </div>
-    <div id="card-modal"></div>
-    <button class="mdc-fab app-fab--absolute" aria-label="Favorite">
-        <a href="#cnt">
-            <span class="mdc-fab__icon material-icons">keyboard_arrow_up</span></a>
-    </button>
+    <!-- <div class="main-panel"> -->
+    <div class="content">
+      <div class="container-fluid">
+        <div class="row" style="justify-content: space-around;">
+          <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="card card-stats">
+              <div class="card-header card-header-warning card-header-icon">
+                <div class="card-icon">
+                  <i class="material-icons">info_outline</i>
+                </div>
+
+                <p class="card-category">Active</p>
+                <h3 class="card-title" id="active">
+                </h3>
+              </div>
+              <div class="card-footer">
+                <div class="stats">
+                  <i class="material-icons">update</i> last updated
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="card card-stats">
+              <div class="card-header card-header-danger card-header-icon">
+                <div class="card-icon">
+                  <i class="material-icons">person_add</i>
+                </div>
+                <p class="card-category">Confirmed</p>
+                <h3 class="card-title" id="confirmed"></h3>
+              </div>
+              <div class="card-footer">
+                <div class="stats">
+                  <i class="material-icons">update</i> last updated
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="card card-stats">
+              <div class="card-header card-header-success card-header-icon">
+                <div class="card-icon">
+                  <i class="material-icons">airline_seat_flat</i>
+                </div>
+                <p class="card-category ">Recovered</p>
+                <h3 class="card-title" id="recovered"></h3>
+              </div>
+              <div class="card-footer">
+                <div class="stats">
+                  <i class="material-icons">update</i> last updated
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="card card-stats">
+              <div class="card-header card-header-danger card-header-icon">
+                <div class="card-icon">
+                  <i class="material-icons">airline_seat_flat</i>
+                </div>
+                <p class="card-category">Deaths</p>
+                <h3 class="card-title" id="deaths"></h3>
+              </div>
+              <div class="card-footer">
+                <div class="stats">
+                  <i class="material-icons">update</i> last updated
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="card card-chart">
+              <div class="card-header card-header-warning">
+                <div class="ct-chart" id="dailyconfirmed"></div>
+              </div>
+              <div class="card-body">
+                <h4 class="card-title">Daily Confirmed</h4>
+                <!-- <p class="card-category">
+                  <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.
+                </p> -->
+              </div>
+
+            </div>
+          </div>
+
+
+          <div class="col-12">
+            <div class="card card-chart">
+              <div class="card-header card-header-success">
+                <div class="ct-chart" id="dailyrecovered"></div>
+              </div>
+              <div class="card-body">
+                <h4 class="card-title">Daily recovered</h4>
+                <!-- <p class="card-category">Last Campaign Performance</p> -->
+              </div>
+
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="card card-chart">
+              <div class="card-header card-header-danger">
+                <div class="ct-chart" id="dailydeceased"></div>
+              </div>
+              <div class="card-body">
+                <h4 class="card-title">Daily Deceased</h4>
+                <!-- <p class="card-category">Last Campaign Performance</p> -->
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+        <div class="card">
+          <div class="card-header card-header-warning">
+            <h4 class="card-title">State Wise Stats</h4>
+          </div>
+          <div class="card-body table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr class="text-warning">
+                  <th>State</th>
+                  <th>Active</th>
+                  <th>Confirmed</th>
+                  <th>Deaths</th>
+                  <!-- <th>Delta-confirmed</th>
+                <th>Delta-deaths</th>
+                <th>Delta-recovered</th>
+                <th>Last-updated-time</th> -->
+                  <th>Recovered</th>
+                </tr>
+              </thead>
+              <tbody id="covid"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <!-- </div> -->
+  <div id="card-modal"></div>
 </body>
+<script>
+  function render(datadailyconfirmed, optionsdailyconfirmed, datadailydeceased, optionsdailydeceased, datadailydeceased,
+    optionsdailydeceased) {
+    new Chartist.Line('#dailyconfirmed', datadailyconfirmed, optionsdailyconfirmed);
+    // md.startAnimationForLineChart(dailyconfirmed);
+    new Chartist.Line('#dailydeceased', datadailydeceased, optionsdailydeceased);
+    // md.startAnimationForLineChart(dailydeceased);
+    new Chartist.Bar('#dailyrecovered', datadailydeceased, optionsdailydeceased);
+    // md.startAnimationForBarChart(dailyrecovered);
+  }
+</script>
 
 </html>
