@@ -130,25 +130,24 @@ $(document).ready(function () {
     $.getJSON("https://api.covid19india.org/data.json", function (data) {
         _D = data.cases_time_series;
         var j = 1;
-        var len = 0;
+        var len = 1;
         for (var i in _D) {
             len++;
         }
-        console.log(len);
+        // console.log(len);
         for (var i in _D) {
-            // if (j > len / 2) {
-            dailyconfirmed.push(parseInt(_D[i]["dailyconfirmed"]));
-            dailydeceased.push(parseInt(_D[i]["dailydeceased"]));
-            dailyrecovered.push(parseInt(_D[i]["dailyrecovered"]));
-            // datadailyconfirmed.labels.push(j.toString());
-            // datadailydeceased.labels.push(j.toString());
-            // datadailyrecovered.labels.push(j.toString());
-            totalconfirmed.push(parseInt(_D[i]["totalconfirmed"]));
-            totaldeceased.push(parseInt(_D[i]["totaldeceased"]));
-            totalrecovered.push(parseInt(_D[i]["totalrecovered"]));
+            if (j > len - 21) {
+                dailyconfirmed.push(parseInt(_D[i]["dailyconfirmed"]));
+                dailydeceased.push(parseInt(_D[i]["dailydeceased"]));
+                dailyrecovered.push(parseInt(_D[i]["dailyrecovered"]));
+                datadailyconfirmed.labels.push(_D[i]["date"]);
+                datadailydeceased.labels.push(_D[i]["date"]);
+                datadailyrecovered.labels.push(_D[i]["date"]);
+                totalconfirmed.push(parseInt(_D[i]["totalconfirmed"]));
+                totaldeceased.push(parseInt(_D[i]["totaldeceased"]));
+                totalrecovered.push(parseInt(_D[i]["totalrecovered"]));
 
-            // }
-
+            }
             j++;
         }
         datadailyconfirmed.series.push(dailyconfirmed);
