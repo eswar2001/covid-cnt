@@ -45,7 +45,7 @@ $(document).ready(function () {
         $("#covid").append(data);
         delete(data);
     });
-    var myMap = new Map()
+    var myMap = new Map();
     // var district_name = [];
     // var district_color_code = [];
     $.getJSON('https://api.covid19india.org/zones.json', function (data) {
@@ -55,7 +55,7 @@ $(document).ready(function () {
             // district_color_code.push(data["zones"][i].zone.split(/\s/).join(''));
             // style="background-color:#FF0000"
         }
-        console.log(myMap);
+        // console.log(myMap);
     });
 
     $.getJSON("https://api.covid19india.org/state_district_wise.json", function (data) {
@@ -81,6 +81,8 @@ $(document).ready(function () {
         }
         $("#card-modal").append(data);
         delete(data);
+        delete(myMap);
+        delete(color);
     });
     $('.modal').modal();
     var dailyconfirmed = [];
@@ -173,5 +175,8 @@ $(document).ready(function () {
         datadailyrecovered.series.push(dailyrecovered);
         render(datadailyconfirmed, optionsdailyconfirmed, datadailydeceased, optionsdailydeceased,
             datadailydeceased, optionsdailydeceased);
+    });
+    $.getJSON('http://gd.geobytes.com/GetCityDetails?callback=?', function (data) {
+        console.log(JSON.stringify(data, null, 2));
     });
 });
