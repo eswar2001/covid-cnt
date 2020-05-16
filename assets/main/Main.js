@@ -45,6 +45,19 @@ $(document).ready(function () {
         $("#covid").append(data);
         delete(data);
     });
+    var myMap = new Map()
+    // var district_name = [];
+    // var district_color_code = [];
+    $.getJSON('https://api.covid19india.org/zones.json', function (data) {
+        for (var i in data["zones"]) {
+            myMap.set(data["zones"][i].district, data["zones"][i].zone);
+            // district_name.push(data["zones"][i].district.split(/\s/).join(''));
+            // district_color_code.push(data["zones"][i].zone.split(/\s/).join(''));
+            // style="background-color:#FF0000"
+        }
+        console.log(myMap);
+    });
+
     $.getJSON("https://api.covid19india.org/state_district_wise.json", function (data) {
         var _state = data;
         data = '';
@@ -55,7 +68,12 @@ $(document).ready(function () {
             data +=
                 '<div class="modal-body"><table class="table table-hover"><thead><tr><td>District</td><td>Confirmed</td></tr></thead><tbody>';
             for (var j in _state[i].districtData) {
-                data += '<tr><td><strong style="color:#000000">' + j + '</strong>&nbsp;&nbsp;</td><td>' +
+                var color = ' ';
+                var va = myMap.get(j);
+                // console.log(va);
+                color += 'style="background-color:' + va + ';"';
+                // console.log(color);
+                data += '<tr ' + color + '><td><strong style="color:#000000">' + j + '</strong>&nbsp;&nbsp;</td><td>' +
                     _state[i].districtData[j]["confirmed"] + '</td></tr>';
             }
             data +=
