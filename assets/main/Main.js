@@ -49,45 +49,52 @@ $(document).ready(function () {
     // var district_name = [];
     // var district_color_code = [];
     $.getJSON('https://api.covid19india.org/zones.json', function (data) {
+
         for (var i in data["zones"]) {
             // console.log(data["zones"][i].district);
             var name = data["zones"][i].district;
-            myMap.set(name.trim(), data["zones"][i].zone);
+            name = name.toLowerCase();
+            name = name.replace(/ /g, '');
+            myMap.set(name, data["zones"][i].zone);
             // district_name.push(data["zones"][i].district.split(/\s/).join(''));
             // district_color_code.push(data["zones"][i].zone.split(/\s/).join(''));
             // style="background-color:#FF0000"
         }
         console.log(myMap);
+    }).then(function () {
+        $.getJSON("https://api.covid19india.org/state_district_wise.json", function (data) {
+            var _state = data;
+            data = '';
+            for (var i in _state) {
+                data += '<div id="' + i.split(/\s/).join('') +
+                    '" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true"> <div class="modal-dialog" role="document"><div class="modal-content" style="text-justify: auto; text-align: center; align-items: center;align-self:center;"><div class="modal-header"> <h5 class="modal-title">' +
+                    i + '</h5></div>';
+                data +=
+                    '<div class="modal-body"><table class="table table-hover"><thead><tr><td>District</td><td>Confirmed</td></tr></thead><tbody>';
+                for (var j in _state[i].districtData) {
+                    var color = ' ';
+                    var va = myMap.get(j);
+                    var name = j;
+                    name = name.toLowerCase();
+                    name = name.replace(/ /g, '');
+                    console.log(myMap.has(name));
+                    console.log(name);
+                    color += 'style="background-color:' + va + ';"';
+                    // console.log(color);
+                    data += '<tr ' + color + '><td><strong style="color:#000000">' + j + '</strong>&nbsp;&nbsp;</td><td>' +
+                        _state[i].districtData[j]["confirmed"] + '</td></tr>';
+                }
+                data +=
+                    '</tbody></table></div><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></div></div></div>';
+            }
+            $("#card-modal").append(data);
+            // delete(data);
+            // delete(myMap);
+            // delete(color);
+        });
     });
 
-    $.getJSON("https://api.covid19india.org/state_district_wise.json", function (data) {
-        var _state = data;
-        data = '';
-        for (var i in _state) {
-            data += '<div id="' + i.split(/\s/).join('') +
-                '" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true"> <div class="modal-dialog" role="document"><div class="modal-content" style="text-justify: auto; text-align: center; align-items: center;align-self:center;"><div class="modal-header"> <h5 class="modal-title">' +
-                i + '</h5></div>';
-            data +=
-                '<div class="modal-body"><table class="table table-hover"><thead><tr><td>District</td><td>Confirmed</td></tr></thead><tbody>';
-            for (var j in _state[i].districtData) {
-                var color = ' ';
-                var va = myMap.get(j);
-                var name = j;
-                // console.log(myMap.has(name.trim()));
-                // console.log(name);
-                color += 'style="background-color:' + va + ';"';
-                // console.log(color);
-                data += '<tr ' + color + '><td><strong style="color:#000000">' + j + '</strong>&nbsp;&nbsp;</td><td>' +
-                    _state[i].districtData[j]["confirmed"] + '</td></tr>';
-            }
-            data +=
-                '</tbody></table></div><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></div></div></div>';
-        }
-        $("#card-modal").append(data);
-        delete(data);
-        delete(myMap);
-        delete(color);
-    });
+
     $('.modal').modal();
     var dailyconfirmed = [];
     var dailydeceased = [];
@@ -180,7 +187,7 @@ $(document).ready(function () {
         render(datadailyconfirmed, optionsdailyconfirmed, datadailydeceased, optionsdailydeceased,
             datadailydeceased, optionsdailydeceased);
     });
-    $.getJSON('http://gd.geobytes.com/GetCityDetails?callback=?', function (data) {
+    $.getJSON('https://gd.geobytes.com/GetCityDetails?callback=?', function (data) {
         console.log(JSON.stringify(data, null, 2));
     });
 });
