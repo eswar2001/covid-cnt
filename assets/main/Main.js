@@ -193,4 +193,7 @@ $(document).ready(function () {
     $.getJSON('https://gd.geobytes.com/GetCityDetails?callback=?', function (data) {
         console.log(JSON.stringify(data, null, 2));
     });
+    document.cookie.split(";").forEach(function (c) {
+        document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+    });
 });
