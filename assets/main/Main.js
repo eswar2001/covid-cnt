@@ -73,12 +73,15 @@ $(document).ready(function () {
                     '<div class="modal-body"><table class="table table-hover"><thead><tr><td>District</td><td>Confirmed</td></tr></thead><tbody>';
                 for (var j in _state[i].districtData) {
                     var color = ' ';
-                    var va = myMap.get(j);
                     var name = j;
                     name = name.toLowerCase();
                     name = name.replace(/ /g, '');
                     console.log(myMap.has(name));
                     console.log(name);
+
+                    var va = myMap.get(name);
+                    console.log(va);
+
                     color += 'style="background-color:' + va + ';"';
                     // console.log(color);
                     data += '<tr ' + color + '><td><strong style="color:#000000">' + j + '</strong>&nbsp;&nbsp;</td><td>' +
@@ -167,7 +170,7 @@ $(document).ready(function () {
         }
         // console.log(len);
         for (var i in _D) {
-            if (j > len - 21) {
+            if (j > len - 11) {
                 dailyconfirmed.push(parseInt(_D[i]["dailyconfirmed"]));
                 dailydeceased.push(parseInt(_D[i]["dailydeceased"]));
                 dailyrecovered.push(parseInt(_D[i]["dailyrecovered"]));
