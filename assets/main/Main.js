@@ -50,12 +50,14 @@ $(document).ready(function () {
     // var district_color_code = [];
     $.getJSON('https://api.covid19india.org/zones.json', function (data) {
         for (var i in data["zones"]) {
-            myMap.set(data["zones"][i].district, data["zones"][i].zone);
+            // console.log(data["zones"][i].district);
+            var name = data["zones"][i].district;
+            myMap.set(name.trim(), data["zones"][i].zone);
             // district_name.push(data["zones"][i].district.split(/\s/).join(''));
             // district_color_code.push(data["zones"][i].zone.split(/\s/).join(''));
             // style="background-color:#FF0000"
         }
-        // console.log(myMap);
+        console.log(myMap);
     });
 
     $.getJSON("https://api.covid19india.org/state_district_wise.json", function (data) {
@@ -70,7 +72,9 @@ $(document).ready(function () {
             for (var j in _state[i].districtData) {
                 var color = ' ';
                 var va = myMap.get(j);
-                // console.log(va);
+                var name = j;
+                // console.log(myMap.has(name.trim()));
+                // console.log(name);
                 color += 'style="background-color:' + va + ';"';
                 // console.log(color);
                 data += '<tr ' + color + '><td><strong style="color:#000000">' + j + '</strong>&nbsp;&nbsp;</td><td>' +
